@@ -25,6 +25,8 @@ class ServiceProviderLaravel5 extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'slack');
+        
+        $this->app->alias('Maknz\Slack\Client', 'maknz.slack');
 
         $this->app->singleton('maknz.slack', function ($app) {
             return new Client(
@@ -42,7 +44,5 @@ class ServiceProviderLaravel5 extends \Illuminate\Support\ServiceProvider
                 new Guzzle
             );
         });
-
-        $this->app->alias('Maknz\Slack\Client', 'maknz.slack');
     }
 }
